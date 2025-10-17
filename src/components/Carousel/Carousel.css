@@ -1,0 +1,44 @@
+.carousel {
+  overflow: hidden;
+  max-width: 100%;
+  position: relative;
+}
+
+.carousel-container {
+  display: flex;
+}
+
+.carousel-item {
+  flex: 0 0 50%;
+  margin-left: var(--spacing-lg);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+}
+
+.arrow-group {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--spacing-xl);
+}
+
+.arrow-button {
+  background-color: #fff;
+  padding: var(--spacing-md) var(--spacing-md);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.arrow-button:hover {
+  background-color: hsla(0, 0%, 100%, 80%);
+}
