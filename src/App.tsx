@@ -1,5 +1,6 @@
 import './App.css';
 import Carousel from './components/Carousel/Carousel';
+import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
 import AboutSection from './ui/AboutSection/AboutSection';
 import CategorySection from './ui/CategorySection/CategorySection';
@@ -34,7 +35,8 @@ export default function App() {
 				{/* menu section */}
 				<MenuSection />
 			</main>
-			<footer>footer</footer>
+			
+			<Footer />
 		</div>
 	)
 }

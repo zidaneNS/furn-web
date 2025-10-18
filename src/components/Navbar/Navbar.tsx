@@ -13,7 +13,7 @@ export default function Navbar() {
         <a href="#about" className="navlink">About</a>
         <a href="#contact" className="navlink">Contact</a>
       </div>
-      <button className="cta-button">Menu</button>
+      <a className="cta-button" href="#menu">Menu</a>
     </nav>
   )
 }

@@ -24,7 +24,11 @@
   --font-fam-hero: 'Macondo', sans-serif;
 
   /* shadow */
-  --shadow-default: 4px 4px 2px var(--color-gray);
+  --shadow-default: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* transition */
+  --transition-default: all 0.3s;
 }
 
 * {
@@ -37,6 +41,10 @@
 button {
   background-color: transparent;
   border: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 html {
@@ -80,14 +88,6 @@ html {
   font-weight: bold;
   color: var(--color-primary);
 }
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--spacing-lg);
-}
-
 
 /* custom */
 .secondary {
