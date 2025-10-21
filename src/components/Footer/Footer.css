@@ -1,6 +1,99 @@
 footer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  row-gap: var(--spacing-xl);
+  width: 100%;
+  background-color: var(--color-dark-primary);
+  padding: var(--spacing-xl) 32px;
+}
+
+.top-footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.left-footer {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-xl);
+}
+
+.left-footer p {
+  color: #fff;
+}
+
+.footer-title {
+  font-size: 5rem;
+  color: var(--color-secondary);
+  font-weight: bold;
+}
+
+.company-contact {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--spacing-md);
+  max-width: 300px;
+}
+
+.contact {
+  display: flex;
   align-items: center;
-  padding: var(--spacing-lg);
+  column-gap: var(--spacing-md);
+}
+
+.right-footer {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+}
+
+.right-footer p, .right-footer a {
+  color: #fff;
+}
+
+.footer-component {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-xl);
+}
+
+.component-title {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+}
+
+.component-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-md);
+}
+
+.component-contents a {
+  cursor: pointer;
+}
+
+.content-schedule {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-sm);
+  border-bottom: 1px solid #fff;
+  column-gap: var(--spacing-md);
+}
+
+.bottom-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottom-footer p {
+  color: #fff;
+}
+
+.company-socials {
+  display: flex;
+  column-gap: var(--spacing-lg);
 }

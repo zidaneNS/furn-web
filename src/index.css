@@ -70,6 +70,7 @@ html {
   cursor: pointer;
   transition: all 0.3s;
   padding: var(--spacing-md) var(--spacing-lg);
+  width: fit-content;
 }
 
 .cta-button:hover {
