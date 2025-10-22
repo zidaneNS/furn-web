@@ -65,10 +65,7 @@ export default function MenuSection() {
               {isCategoryOpen && (
                 <div className="category-list input-form">
                   {categories.map((category, id) => (
-                    <div className="category-list-item" key={id} onClick={() => {
-                      setSelectedCategory(category);
-                      setIsCategoryOpen(false);
-                    }}>{category}</div>
+                    <div className="category-list-item" key={id} onClick={() => setSelectedCategory(category)}>{category}</div>
                   ))}
                 </div>
               )}

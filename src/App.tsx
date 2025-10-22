@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import Carousel from './components/Carousel/Carousel';
 import Footer from './components/Footer/Footer';
@@ -5,10 +6,16 @@ import Navbar from './components/Navbar/Navbar';
 import AboutSection from './ui/AboutSection/AboutSection';
 import CategorySection from './ui/CategorySection/CategorySection';
 import MenuSection from './ui/MenuSection/MenuSection';
+import Popup from './components/Popup/Popup';
 
 export default function App() {
+	const [showModal, setShowModal] = useState<boolean>(false);
+
 	return (
 		<div className="wrapper">
+			<div className="modal">
+				<Popup />
+			</div>
 			<Navbar />
 			<main>
 				{/* hero section */}
