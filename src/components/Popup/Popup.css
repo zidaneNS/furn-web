@@ -59,3 +59,12 @@
 .detail-input-container * {
   flex: 1;
 }
+
+.available-schedules-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: space-between;
+  width: 100%;
+  place-items: center;
+  gap: var(--spacing-xl);
+}
