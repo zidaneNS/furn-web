@@ -36,3 +36,26 @@
   background-color: var(--color-primary);
   color: #fff;
 }
+
+.popup-title {
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-xl) 0;
+  border-top: 1px solid var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
+  font-weight: normal;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-xl);
+}
+
+.detail-input-container {
+  display: flex;
+  width: 100%;
+}
+
+.detail-input-container * {
+  flex: 1;
+}

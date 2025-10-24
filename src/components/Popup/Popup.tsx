@@ -4,7 +4,8 @@ import groupIcon from '../../assets/icons/icon-group.svg';
 import expandDown from '../../assets/icons/icon-expand-down.svg';
 import { useState } from 'react';
 import './Popup.css';
-import { DatePicker, Select, TimePicker } from 'antd';
+import { ConfigProvider, DatePicker, Select, TimePicker } from 'antd';
+import dayjs from 'dayjs';
 
 interface Step {
   title: string,
@@ -39,18 +40,37 @@ export default function Popup() {
       {steps.indexOf(selectedStep) === 0 && (
         <div className="step-content">
           <div className="detail-input-container">
-            <DatePicker prefix={Icon(dateRange)} suffixIcon={Icon(expandDown)} />
-            <TimePicker prefix={Icon(timeIcon)} suffixIcon={Icon(expandDown)} />
-            <Select 
-              prefix={Icon(groupIcon)} 
-              suffixIcon={Icon(expandDown)} 
-              defaultValue={'2 People'}
-              options={[
-                {value: '1 Person', label: '1 Person'},
-                {value: '2 People', label: '2 People'},
-                {value: '3 People', label: '3 People'},
-              ]}
-            />
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorBorder: '#A08963',
+                  borderRadius: 0,
+                  fontFamily: 'Nunito, sans-serif'
+                }
+              }}
+            >
+              <DatePicker 
+                prefix={Icon(dateRange)} 
+                suffixIcon={Icon(expandDown)}
+                defaultValue={dayjs()}
+                disabledDate={(current) => current && current <= dayjs().endOf('day')}
+              />
+              <TimePicker 
+                prefix={Icon(timeIcon)} 
+                suffixIcon={Icon(expandDown)}
+                defaultValue={dayjs()}
+              />
+              <Select 
+                prefix={Icon(groupIcon)} 
+                suffixIcon={Icon(expandDown)} 
+                defaultValue={'2 People'}
+                options={[
+                  {value: '1 Person', label: '1 Person'},
+                  {value: '2 People', label: '2 People'},
+                  {value: '3 People', label: '3 People'},
+                ]}
+              />
+            </ConfigProvider>
           </div>
           <div className="cta-button" style={{ width: '100%' }}>Find a Table</div>
 
