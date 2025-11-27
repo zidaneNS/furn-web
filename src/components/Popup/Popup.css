@@ -68,3 +68,44 @@
   place-items: center;
   gap: var(--spacing-xl);
 }
+
+.form-title {
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-input-container {
+  display: flex;
+  width: 100%;
+  column-gap: var(--spacing-md);
+}
+
+.input-form, .input-phone {
+  border: 1px solid var(--color-primary);
+  border-radius: 4px;
+  padding: var(--spacing-md);
+  width: 100%;
+}
+
+.input-phone {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.input-phone p {
+  text-align: center;
+  border-right: 1px solid var(--color-primary);
+  padding: 0 var(--spacing-sm);
+}
+
+.input-phone input {
+  flex: 1;
+  outline: none;
+  border: none;
+}
+
+.text-box {
+  height: 48px;
+}

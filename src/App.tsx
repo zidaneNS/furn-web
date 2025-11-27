@@ -13,9 +13,11 @@ export default function App() {
 
 	return (
 		<div className="wrapper">
-			<div className="modal">
-				<Popup />
-			</div>
+			{showModal && (
+				<div className="modal">
+					<Popup setShowModal={setShowModal} />
+				</div>
+			)}
 			<Navbar />
 			<main>
 				{/* hero section */}
@@ -23,7 +25,7 @@ export default function App() {
 					<h1 className='hero-title'>Delicious Food & Drinks, Enjoy With Wonderful Experience</h1>
 					<p className="hero-text">We serve food, harmony, & laughter since 1998</p>
 					<Carousel />
-					<button className="cta-button">BOOK A TABLE</button>
+					<button onClick={() => setShowModal(true)} className="cta-button">BOOK A TABLE</button>
 				</section>
 
 				{/* partner section */}
