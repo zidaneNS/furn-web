@@ -85,6 +85,11 @@
   white-space: nowrap;
   animation: slideDown 0.3s ease forwards;
   transform-origin: top;
+  width: max-content;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: #fff;
+  border-radius: var(--spacing-sm);
+  z-index: 10;
 }
 
 .category-list-item {
@@ -92,6 +97,7 @@
   padding: var(--spacing-md) var(--spacing-lg);
   border-bottom: 1px solid var(--color-gray);
   transition: var(--transition-default);
+  cursor: pointer;
 }
 
 .category-list-item:hover {

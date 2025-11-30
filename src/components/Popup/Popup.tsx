@@ -6,6 +6,7 @@ import { useEffect, useState, type SetStateAction } from 'react';
 import './Popup.css';
 import { ConfigProvider, DatePicker, Select, TimePicker } from 'antd';
 import dayjs from 'dayjs';
+import validatePhone from '../../helper/validatePhone';
 
 interface Step {
   title: string,
@@ -31,19 +32,39 @@ export default function Popup(props: Props) {
   const [selectedStep, setSelectedStep] = useState<Step>(steps[0]);
   const [showAvailableTime, setShowAvailableTime] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [firsName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [request, setRequest] = useState<string>('');
 
   useEffect(() => {
-
     setIsLoading(true)
     const time = setTimeout(() => {
       if (showAvailableTime) {
         setIsLoading(false)
       }
-    }, 1000)
+    }, 500)
 
     return () => clearTimeout(time);
 
   }, [showAvailableTime]);
+
+  async function handleSubmit() {
+    props.setShowModal(false);
+    // try {
+    //   const message = await client.sendAsync({
+    //     text: 'hello',
+    //     from: '<zidane.nur004@gmail.com>',
+    //     to: '<zidane.dummy@gmail.com>',
+    //     subject: 'testing'
+    //   });
+
+    //   console.log('message: ', message);
+    // } catch (err) {
+    //   console.error(err);
+    // }
+  }
 
   return (
     <div className="popup">
@@ -110,18 +131,15 @@ export default function Popup(props: Props) {
         <div className="step-content">
           <p className="form-title">Dinner Details</p>
           <div className="form-input-container">
-            <input type="text" name="firstName" id="firstName" placeholder='First Name' className='input-form' />
-            <input type="text" name="lastName" id="lastName" placeholder='Last Name' className='input-form' />
+            <Input type='text' name='firstName' id='firstName' placeholder='First Name' value={firsName} setValue={setFirstName} />
+            <Input type="text" name="lastName" id="lastName" placeholder='Last Name' value={lastName} setValue={setLastName} />
           </div>
           <div className="form-input-container">
-            <div className="input-phone">
-              <p>+62</p>
-              <input type="tel" name="phone" id="phone" />
-            </div>
-            <input type="email" name="email" id="email" placeholder='Email' className='input-form' />
+            <Input type='tel' name='phone' id='phone' value={phoneNumber} setValue={setPhoneNumber} placeholder='851...' />
+            <Input type="email" name="email" id="email" placeholder='Email' value={email} setValue={setEmail} />
           </div>
-          <input type="textbox" name="request" id="request" placeholder='Add special request (optional)' className='input-form text-box' />
-          <button onClick={() => props.setShowModal(false)} className="cta-button" style={{ width: '100%' }}>Complete Booking</button>
+          <textarea name="request" id="request" rows={5} className='input-form' placeholder='Add special request (optional)' value={request} onChange={(e) => setRequest(e.target.value)} />
+          <button onClick={() => handleSubmit()} className="cta-button" style={{ width: '100%' }}>Complete Booking</button>
         </div>
       )}
 
@@ -130,3 +148,36 @@ export default function Popup(props: Props) {
 }
 
 const Icon = (src: string) => <img src={src} alt="icon" />
+
+interface InputProps {
+  type: React.HTMLInputTypeAttribute;
+  name: string;
+  id: string;
+  placeholder?: string;
+  value: string;
+  setValue: React.Dispatch<SetStateAction<string>>
+}
+
+function Input(props: InputProps) {
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  useEffect(() => {
+    if (props.type === 'tel') {
+      setErrorMessage(validatePhone(props.value) || '');
+    }
+  }, [props.value]);
+
+  return (
+    <div className="input-form-container">
+      {props.type === 'tel' ? (
+        <div className="input-phone">
+          <p>+62</p>
+          <input type="tel" name="phone" id="phone" placeholder={props.placeholder} value={props.value} onChange={(e) => props.setValue(e.target.value)} />
+        </div>
+      ) : (
+        <input onChange={(e) => props.setValue(e.target.value)} value={props.value} type={props.type} name={props.name} id={props.id} placeholder={props.placeholder} className='input-form' />
+      )}
+      {errorMessage.length > 0 && <p className="error">{errorMessage}</p>}
+    </div>
+  )
+}

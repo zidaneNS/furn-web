@@ -1,7 +1,7 @@
 import './MenuSection.css';
 import menu from '../../assets/icons/icon-menu.svg';
 import expandDown from '../../assets/icons/icon-expand-down.svg';
-import search from '../../assets/icons/icon-search.svg';
+import searchIcon from '../../assets/icons/icon-search.svg';
 import curry from '../../assets/images/curry.png';
 import steak from '../../assets/images/steak.png';
 import doubleChevronLeft from '../../assets/icons/icon-double-chevron-left.svg';
@@ -10,6 +10,7 @@ import star from '../../assets/icons/icon-star.svg';
 import starFill from '../../assets/icons/icon-star-fill.svg';
 import randomPick from '../../helper/randomPick';
 import { useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 interface MenuItem {
   name: string,
@@ -34,7 +35,18 @@ const categories: Category[] = ['All', 'Main Course', 'Drink', 'Dessert']
 export default function MenuSection() {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category>('All');
+  const [search, setSearch] = useState<string>('');
+  const [debouncedSearch] = useDebounce(search, 500);
   const categoryRef = useRef<HTMLDivElement>(null);
+  const [menuData, setMenuData] = useState<MenuItem[]>([]);
+
+  useEffect(() => {
+    if (debouncedSearch.length > 0) {
+      setMenuData(menuItems.filter(item => item.name.toLocaleLowerCase().trim().includes(debouncedSearch.toLocaleLowerCase().trim())));
+    } else {
+      setMenuData(menuItems);
+    }
+  }, [debouncedSearch]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -62,24 +74,27 @@ export default function MenuSection() {
             <button className="input-form category-select" onClick={() => setIsCategoryOpen(prev => !prev)}>
               <p>{selectedCategory}</p>
               <img src={expandDown} alt="expand down" />
-              {isCategoryOpen && (
-                <div className="category-list input-form">
-                  {categories.map((category, id) => (
-                    <div className="category-list-item" key={id} onClick={() => setSelectedCategory(category)}>{category}</div>
-                  ))}
-                </div>
-              )}
             </button>
+            {isCategoryOpen && (
+              <div className="category-list">
+                {categories.map((category, id) => (
+                  <div className="category-list-item" key={id} onClick={() => {
+                    setSelectedCategory(category);
+                    setIsCategoryOpen(false);
+                  }}>{category}</div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="input-form input-search-container">
-            <img src={search} alt="search" />
-            <input type="text" name="search" id="search" className="input-search" placeholder="search" />
+            <img src={searchIcon} alt="search" />
+            <input onChange={(e) => setSearch(e.target.value)} type="text" name="search" id="search" className="input-search" placeholder="search" value={search} />
           </div>
         </div>
       </div>
 
       <div className="menu-item-container">
-        {menuItems.map((item, id) => (
+        {menuData.map((item, id) => (
           <div className="menu-item" key={id}>
             <img src={item.imgUrl} alt={item.name} />
             <div className="menu-item-info">
